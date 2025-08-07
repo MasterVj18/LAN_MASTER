@@ -28,13 +28,6 @@ public class CommandListener implements Runnable {
                     case Command.CAPTURE_SCREEN:
                         ScreenCapture.capture(socket);
                         break;
-                    case Command.START_STREAM:
-                        ScreenCapture.startScreenStreaming();
-                        break;
-                    case Command.STOP_STREAM:
-                        ScreenCapture.stopScreenStreaming();
-                        break;
-
                     default:
                         System.out.println("Unknown command: " + command);
                 }
