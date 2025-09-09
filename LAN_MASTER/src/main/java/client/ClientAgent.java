@@ -8,7 +8,7 @@ public class ClientAgent {
     public static void main(String[] args) {
         try {
             System.out.println("Attempting to connect to server at localhost:9090...");
-            Socket socket = new Socket("10.1.150.135", 9090);
+            Socket socket = new Socket("localhost", 9090);
             System.out.println("Connection established.");
 
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);

@@ -22,12 +22,34 @@ public class CommandListener implements Runnable {
                     case Command.SHUTDOWN:
                         Runtime.getRuntime().exec("shutdown -s -t 0");
                         break;
-                    case Command.CAPTURE_WEBCAM:
-                        WebcamHandler.captureImage(socket);
+                    case Command.START_STREAM:
+                        ScreenCapture.startScreenStreaming();
                         break;
-                    case Command.CAPTURE_SCREEN:
-                        ScreenCapture.capture(socket);
+                    case Command.STOP_STREAM:
+                        ScreenCapture.stopScreenStreaming();
                         break;
+                    case Command.START_WEBCAM_STREAM:
+                        WebcamStreamer.startStreaming("localhost", 9092);
+                        break;
+                    case Command.STOP_WEBCAM_STREAM:
+                        WebcamStreamer.stopStreaming();
+                        break;
+                    case Command.START_REMOTE_CONTROL:
+                        new Thread(() -> {
+                            try {
+                                mousemove.RemoteControlServer.main(null);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }).start();
+                        break;
+                    case Command.STOP_REMOTE_CONTROL:
+                        RemoteControlHandler.stopControl();
+                        break;
+
+
+
+
                     default:
                         System.out.println("Unknown command: " + command);
                 }
@@ -36,5 +58,6 @@ public class CommandListener implements Runnable {
             e.printStackTrace();
         }
     }
+
 }
 
